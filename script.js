@@ -124,25 +124,38 @@ if (journeyPath) {
   pathObserver.observe(journeyPath);
 }
 
-const networkLines = document.querySelectorAll('.network-link');
-const networkNodes = document.querySelectorAll('.network-node');
-const networkObserver = new IntersectionObserver((entries) => {
-  if (entries[0]?.isIntersecting) {
-    networkLines.forEach((line, index) => {
-      line.animate([{ strokeDashoffset: 400 }, { strokeDashoffset: 0 }], { duration: 1000 + index * 120, easing: 'ease-in-out' });
-    });
-    networkNodes.forEach((node, index) => {
-      node.animate([{ opacity: 0, transform: 'scale(0.7)' }, { opacity: 1, transform: 'scale(1)' }], {
-        duration: 700,
-        delay: index * 80,
-        easing: 'ease-out'
-      });
-    });
-    networkObserver.disconnect();
-  }
-}, { threshold: 0.35 });
+const ecosystemCards = document.querySelectorAll('.eco-card');
+const ecoTitle = document.getElementById('ecoTitle');
+const ecoText = document.getElementById('ecoText');
 
-const ecosystemVisual = document.querySelector('.ecosystem-visual');
-if (ecosystemVisual) {
-  networkObserver.observe(ecosystemVisual);
-}
+const ecoContent = {
+  users: {
+    title: 'Users',
+    text: 'Every workout becomes a signal that helps the platform recommend the next best step.'
+  },
+  gyms: {
+    title: 'Gyms',
+    text: 'Discovery, check-ins, memberships, retention, and CRM all live inside one operating layer.'
+  },
+  trainers: {
+    title: 'Trainers',
+    text: 'A trusted marketplace for coaching, bookings, influence, and long-term growth.'
+  },
+  brands: {
+    title: 'Brands',
+    text: 'Commerce and partnerships turn engagement into recurring business value.'
+  }
+};
+
+ecosystemCards.forEach((card) => {
+  card.addEventListener('click', () => {
+    ecosystemCards.forEach((item) => item.classList.remove('active'));
+    card.classList.add('active');
+
+    const key = card.dataset.eco;
+    if (ecoTitle && ecoText && ecoContent[key]) {
+      ecoTitle.textContent = ecoContent[key].title;
+      ecoText.textContent = ecoContent[key].text;
+    }
+  });
+});
