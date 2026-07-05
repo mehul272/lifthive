@@ -75,3 +75,74 @@ document.querySelectorAll('.f-card').forEach((featureCard) => {
     featureCard.style.transform = '';
   });
 });
+
+const glow = document.querySelector('.cursor-glow');
+window.addEventListener('pointermove', (event) => {
+  if (glow) {
+    glow.style.left = `${event.clientX}px`;
+    glow.style.top = `${event.clientY}px`;
+  }
+});
+
+const counterElements = document.querySelectorAll('.counter');
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      const target = Number(entry.target.dataset.target || '0');
+      const duration = 1200;
+      const startTime = performance.now();
+      const tick = (now) => {
+        const progress = Math.min((now - startTime) / duration, 1);
+        const value = Math.floor(progress * target);
+        entry.target.textContent = value;
+        if (progress < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+      counterObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.6 });
+
+counterElements.forEach((counter) => counterObserver.observe(counter));
+
+const journeyPath = document.querySelector('.journey-svg path');
+if (journeyPath) {
+  const pathLength = journeyPath.getTotalLength();
+  journeyPath.style.strokeDasharray = `${pathLength}`;
+  journeyPath.style.strokeDashoffset = `${pathLength}`;
+
+  const pathObserver = new IntersectionObserver((entries) => {
+    if (entries[0]?.isIntersecting) {
+      journeyPath.animate(
+        [{ strokeDashoffset: pathLength }, { strokeDashoffset: 0 }],
+        { duration: 1800, easing: 'ease-in-out' }
+      );
+      pathObserver.disconnect();
+    }
+  }, { threshold: 0.3 });
+
+  pathObserver.observe(journeyPath);
+}
+
+const networkLines = document.querySelectorAll('.network-link');
+const networkNodes = document.querySelectorAll('.network-node');
+const networkObserver = new IntersectionObserver((entries) => {
+  if (entries[0]?.isIntersecting) {
+    networkLines.forEach((line, index) => {
+      line.animate([{ strokeDashoffset: 400 }, { strokeDashoffset: 0 }], { duration: 1000 + index * 120, easing: 'ease-in-out' });
+    });
+    networkNodes.forEach((node, index) => {
+      node.animate([{ opacity: 0, transform: 'scale(0.7)' }, { opacity: 1, transform: 'scale(1)' }], {
+        duration: 700,
+        delay: index * 80,
+        easing: 'ease-out'
+      });
+    });
+    networkObserver.disconnect();
+  }
+}, { threshold: 0.35 });
+
+const ecosystemVisual = document.querySelector('.ecosystem-visual');
+if (ecosystemVisual) {
+  networkObserver.observe(ecosystemVisual);
+}

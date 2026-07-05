@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LiftHive OS — The AI Operating System for Fitness</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="nav-shell" id="ns">
+    <nav>
+      <a class="nav-logo" href="index.html">🐝 LiftHive</a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="#hero">Overview</a></li>
+        <li><a href="#journey">Story</a></li>
+        <li><a href="#trainer">Trainers</a></li>
+        <li><a href="#ecosystem">Ecosystem</a></li>
+        <li><a href="#growth">Growth</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="section-tabs">
+    <a href="#hero" class="section-tab active">Overview</a>
+    <a href="#journey" class="section-tab">Story</a>
+    <a href="#trainer" class="section-tab">Trainers</a>
+    <a href="#ecosystem" class="section-tab">Ecosystem</a>
+    <a href="#growth" class="section-tab">Growth</a>
+  </div>
+
+  <main>
+    <section class="hero os-hero" id="hero">
+      <div class="cursor-glow"></div>
+      <div class="hero-bg"></div>
+      <div class="hero-inner os-hero-inner">
+        <div class="hero-left">
+          <div class="hero-badge"><span class="blink"></span> LiftHive OS · Story-driven AI fitness operating system</div>
+          <h1 class="hero-title">From first alarm to <span class="accent">last stretch</span>, LiftHive becomes your daily fitness OS.</h1>
+          <p class="hero-tagline">
+            This is not a traditional app. It is a cinematic product story that follows the user from wake-up to recovery, turning every touchpoint into momentum.
+          </p>
+          <div class="btn-row">
+            <a href="#journey" class="btn-p">Follow the Story</a>
+            <a href="#trainer" class="btn-g">See Career Path</a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat-card">
+              <strong class="counter" data-target="92">0</strong>
+              <span>Sleep score</span>
+            </div>
+            <div class="stat-card">
+              <strong class="counter" data-target="145">0</strong>
+              <span>XP earned</span>
+            </div>
+            <div class="stat-card">
+              <strong class="counter" data-target="7">0</strong>
+              <span>day streak</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="floating-phones">
+            <div class="phone-shell phone-main">
+              <div class="phone-top">LiftHive</div>
+              <div class="phone-screen">
+                <div class="phone-pill">Good Morning Rahul ☀️</div>
+                <div class="phone-pill alt">92% Sleep Score · Chest Day</div>
+                <div class="phone-graph"></div>
+                <div class="phone-row"><span>Bench</span><strong>60kg</strong></div>
+                <div class="phone-row"><span>Rest</span><strong>45s</strong></div>
+              </div>
+            </div>
+            <div class="phone-shell phone-side">
+              <div class="phone-top">Progress</div>
+              <div class="phone-screen compact">
+                <div class="mini-badge">+5kg PR</div>
+                <div class="mini-bars"><span></span><span></span><span></span></div>
+                <div class="mini-copy">Recovery is strong</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="journey" class="container stacked-section story-section">
+      <div class="section-heading reveal">
+        <div class="tag">🔄 Cinematic User Journey</div>
+        <h2 class="h1">The product unfolds like a story, one scene at a time.</h2>
+        <p class="sub">Instead of showing a static feature map, this experience moves through real moments in the day — from alarm to recovery.</p>
+      </div>
+      <div class="story-shell reveal">
+        <div class="story-visual">
+          <svg class="journey-svg" viewBox="0 0 420 1800" aria-hidden="true">
+            <path d="M210 40 C210 220, 210 320, 210 470 S210 760, 210 940 S210 1250, 210 1420 S210 1620, 210 1720" />
+          </svg>
+          <div class="story-step story-step--active">
+            <div class="story-card">
+              <div class="story-icon">🌅</div>
+              <h3>Wake Up</h3>
+              <p>Smart alarm, sleep score, motivation, and today's mission.</p>
+              <div class="phone-mockup">Good Morning Rahul ☀️<br/>92% Sleep · Chest Day</div>
+            </div>
+          </div>
+          <div class="story-step">
+            <div class="story-card">
+              <div class="story-icon">🚶</div>
+              <h3>Go to Gym</h3>
+              <p>Nearby partner gym, crowd, parking, and QR check-in.</p>
+              <div class="phone-mockup">Gold Gym · 2km away · Crowd 28% · Book spot?</div>
+            </div>
+          </div>
+          <div class="story-step">
+            <div class="story-card story-card--highlight">
+              <div class="story-icon">🏋</div>
+              <h3>Workout Mode</h3>
+              <p>Beat sync music, AI rep counter, rest timer, voice coach, and automatic logging.</p>
+              <div class="phone-mockup">🎵 Beast Mode · Bench 60kg · Rest 45s</div>
+            </div>
+          </div>
+          <div class="story-step">
+            <div class="story-card">
+              <div class="story-icon">📈</div>
+              <h3>Progress</h3>
+              <p>PRs, calories, XP, recovery, and streaks appear instantly.</p>
+              <div class="phone-mockup">Workout Finished · +145 XP · +1 Day Streak</div>
+            </div>
+          </div>
+          <div class="story-step">
+            <div class="story-card">
+              <div class="story-icon">🌍</div>
+              <h3>Community</h3>
+              <p>Share wins, follow friends, react to stories, and complete challenges.</p>
+              <div class="phone-mockup">🔥 New PR posted · 36 likes · Pune #127</div>
+            </div>
+          </div>
+          <div class="story-step">
+            <div class="story-card">
+              <div class="story-icon">🛒</div>
+              <h3>Marketplace</h3>
+              <p>Protein, shoes, equipment, diet plans, trainers, and events.</p>
+              <div class="phone-mockup">AI recommendation · Whey running low · 20% off</div>
+            </div>
+          </div>
+          <div class="story-step">
+            <div class="story-card">
+              <div class="story-icon">🌙</div>
+              <h3>Recovery</h3>
+              <p>Stretch, sleep score, recovery advice, and tomorrow's plan.</p>
+              <div class="phone-mockup">Sleep Score 88% · Tomorrow Leg Day · Stretch 8 mins</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="trainer" class="container stacked-section">
+      <div class="section-heading reveal">
+        <div class="tag">🤝 Trainer Ecosystem</div>
+        <h2 class="h1">The strongest differentiator in the whole product.</h2>
+        <p class="sub">LiftHive does not stop at certified trainers. It creates a clear path for a normal user to become a trusted mentor, then a paid coach, and eventually a high-level instructor.</p>
+      </div>
+      <div class="trainer-grid reveal">
+        <div class="trainer-story-card">
+          <h3>Why this matters</h3>
+          <p>Most fitness products only connect users to trainers. LiftHive creates a real career ladder and a trusted economy around that growth.</p>
+        </div>
+        <div class="trainer-steps">
+          <div class="trainer-step"><strong>1.</strong> Start as a normal user</div>
+          <div class="trainer-step"><strong>2.</strong> Become a verified member</div>
+          <div class="trainer-step"><strong>3.</strong> Grow into a community mentor</div>
+          <div class="trainer-step"><strong>4.</strong> Earn certification and coaching access</div>
+          <div class="trainer-step"><strong>5.</strong> Scale into personal training and elite coaching</div>
+        </div>
+      </div>
+      <div class="trainer-flow reveal">
+        <div class="trainer-flow-step">
+          <span class="trainer-flow-label">Step 1</span>
+          <strong>👤 Normal User</strong>
+          <p>Starts by training, logging workouts, and building consistency.</p>
+        </div>
+        <div class="trainer-flow-arrow"></div>
+        <div class="trainer-flow-step">
+          <span class="trainer-flow-label">Step 2</span>
+          <strong>✅ Verified Member</strong>
+          <p>Builds trust through activity, reviews, and community behavior.</p>
+        </div>
+        <div class="trainer-flow-arrow"></div>
+        <div class="trainer-flow-step">
+          <span class="trainer-flow-label">Step 3</span>
+          <strong>🌟 Community Mentor</strong>
+          <p>Supports new users with accountability, spotting, and guidance.</p>
+        </div>
+        <div class="trainer-flow-arrow"></div>
+        <div class="trainer-flow-step">
+          <span class="trainer-flow-label">Step 4</span>
+          <strong>🏋 Certified Trainer</strong>
+          <p>Moves into structured coaching and paid sessions.</p>
+        </div>
+        <div class="trainer-flow-arrow"></div>
+        <div class="trainer-flow-step">
+          <span class="trainer-flow-label">Step 5</span>
+          <strong>💼 Personal Trainer</strong>
+          <p>Offers 1-on-1 training and builds a recurring client base.</p>
+        </div>
+        <div class="trainer-flow-arrow"></div>
+        <div class="trainer-flow-step trainer-flow-step--elite">
+          <span class="trainer-flow-label">Step 6</span>
+          <strong>🥇 Elite Coach</strong>
+          <p>Becomes a high-impact expert with premium coaching and influence.</p>
+        </div>
+      </div>
+      <div class="lottie-wrap reveal" id="lottiePulse"></div>
+    </section>
+
+    <section id="ecosystem" class="container stacked-section">
+      <div class="section-heading reveal">
+        <div class="tag">🧩 Live Ecosystem</div>
+        <h2 class="h1">One living network connecting users, gyms, trainers, and brands.</h2>
+      </div>
+      <div class="ecosystem-grid reveal">
+        <div class="ecosystem-visual">
+          <svg viewBox="0 0 600 420" class="network-svg" aria-hidden="true">
+            <line class="network-link" x1="300" y1="210" x2="160" y2="110" />
+            <line class="network-link" x1="300" y1="210" x2="440" y2="110" />
+            <line class="network-link" x1="300" y1="210" x2="170" y2="320" />
+            <line class="network-link" x1="300" y1="210" x2="430" y2="320" />
+            <line class="network-link" x1="300" y1="210" x2="300" y2="80" />
+            <circle class="network-node network-node--center" cx="300" cy="210" r="44"></circle>
+            <circle class="network-node" cx="160" cy="110" r="24"></circle>
+            <circle class="network-node" cx="440" cy="110" r="24"></circle>
+            <circle class="network-node" cx="170" cy="320" r="24"></circle>
+            <circle class="network-node" cx="430" cy="320" r="24"></circle>
+            <circle class="network-node" cx="300" cy="80" r="24"></circle>
+          </svg>
+          <div class="network-label network-label--users">Users</div>
+          <div class="network-label network-label--gyms">Gyms</div>
+          <div class="network-label network-label--trainers">Trainers</div>
+          <div class="network-label network-label--brands">Brands</div>
+          <div class="network-label network-label--ai">AI</div>
+        </div>
+        <div class="ecosystem-copy">
+          <div class="arch-card">
+            <h3>Users</h3>
+            <p>Daily training, challenges, progress, and social motivation.</p>
+          </div>
+          <div class="arch-card">
+            <h3>Gyms</h3>
+            <p>Attendance, memberships, discovery, CRM, and retention.</p>
+          </div>
+          <div class="arch-card">
+            <h3>Trainers</h3>
+            <p>Coaching, business growth, community influence, and monetization.</p>
+          </div>
+          <div class="arch-card">
+            <h3>Brands & Companies</h3>
+            <p>Marketplace, wellness programs, sponsorships, and events.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container stacked-section">
+      <div class="section-heading reveal">
+        <div class="tag">⚖️ LiftHive vs Fit Square</div>
+        <h2 class="h1">LiftHive is the full lifecycle. Fit Square is only one part of it.</h2>
+      </div>
+      <div class="comparison reveal">
+        <div class="comparison-row comparison-head">
+          <div>Category</div>
+          <div>LiftHive</div>
+          <div>Fit Square</div>
+        </div>
+        <div class="comparison-row">
+          <div>Core experience</div>
+          <div>Full fitness OS</div>
+          <div>Gym access + booking</div>
+        </div>
+        <div class="comparison-row">
+          <div>Community</div>
+          <div>Challenges, stories, leaderboards</div>
+          <div>Limited social layer</div>
+        </div>
+        <div class="comparison-row">
+          <div>Trainer economy</div>
+          <div>Multi-tier growth path</div>
+          <div>Mostly booking-based</div>
+        </div>
+        <div class="comparison-row">
+          <div>Recovery & AI</div>
+          <div>Sleep, recovery, next steps</div>
+          <div>Minimal lifecycle support</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="growth" class="container stacked-section">
+      <div class="section-heading reveal">
+        <div class="tag">🗺️ Premium Roadmap</div>
+        <h2 class="h1">A strong foundation now, exponential growth later.</h2>
+      </div>
+      <div class="roadmap-flow reveal">
+        <div class="roadmap-item"><strong>2026</strong><span>Gym discovery, QR check-ins, memberships, reward loops.</span></div>
+        <div class="roadmap-item"><strong>2027</strong><span>AI coach, smart tracking, community, music sync, and streaks.</span></div>
+        <div class="roadmap-item"><strong>2028</strong><span>Trainer marketplace, creator tools, corporate wellness, and events.</span></div>
+        <div class="roadmap-item"><strong>2029</strong><span>Wearables, insurance, global expansion, and intelligent recovery.</span></div>
+      </div>
+    </section>
+
+    <section id="revenue" class="container stacked-section">
+      <div class="section-heading reveal">
+        <div class="tag">💰 Revenue Engine</div>
+        <h2 class="h1">A platform designed to compound across every layer of fitness.</h2>
+      </div>
+      <div class="revenue-grid reveal">
+        <div class="revenue-card">Premium subscriptions</div>
+        <div class="revenue-card">Gym SaaS</div>
+        <div class="revenue-card">Trainer commissions</div>
+        <div class="revenue-card">Marketplace</div>
+        <div class="revenue-card">Corporate wellness</div>
+        <div class="revenue-card">AI coaching</div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
