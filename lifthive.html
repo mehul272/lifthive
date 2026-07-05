@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LiftHive — India's Social Gym Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #06060F;
+  --surface:   #0C0C1D;
+  --surface2:  #111125;
+  --flame:     #FF5722;
+  --ember:     #FF8A50;
+  --gold:      #FFC107;
+  --purple:    #7C3AED;
+  --teal:      #00BFA5;
+  --text:      #F0F0FF;
+  --dim:       rgba(240,240,255,0.5);
+  --border:    rgba(255,255,255,0.07);
+  --glow-o:    rgba(255,87,34,0.22);
+  --glow-p:    rgba(124,58,237,0.18);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* ── UTILITIES ─────────────────────────────────── */
+.container { max-width: 1160px; margin: 0 auto; padding: 0 28px; }
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,87,34,0.1);
+  border: 1px solid rgba(255,87,34,0.28);
+  color: var(--ember);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 100px;
+  margin-bottom: 20px;
+}
+
+.h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  margin-bottom: 14px;
+}
+
+.sub {
+  color: var(--dim);
+  font-size: 1.05rem;
+  font-weight: 400;
+  max-width: 540px;
+  line-height: 1.65;
+}
+
+.divider { height: 1px; background: linear-gradient(90deg, transparent, var(--border) 30%, var(--border) 70%, transparent); }
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+.reveal.on { opacity: 1; transform: none; }
+
+section { padding: 96px 0; }
+
+/* ── NAVBAR ─────────────────────────────────────── */
+.nav-shell {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  border-bottom: 1px solid transparent;
+  transition: background .3s, border-color .3s;
+}
+.nav-shell.sticky {
+  background: rgba(6,6,15,.88);
+  backdrop-filter: blur(22px);
+  border-color: var(--border);
+}
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 16px 28px;
+}
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--flame), var(--gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-decoration: none;
+}
+.nav-links { display: flex; gap: 28px; list-style: none; }
+.nav-links a { color: var(--dim); text-decoration: none; font-size: 13px; font-weight: 500; transition: color .2s; }
+.nav-links a:hover { color: var(--text); }
+
+/* ── HERO ───────────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 15% 40%, rgba(255,87,34,.13) 0%, transparent 60%),
+    radial-gradient(ellipse 55% 50% at 85% 65%, rgba(124,58,237,.1) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 35% at 55% 5%,  rgba(0,191,165,.07) 0%, transparent 55%);
+}
+.hex-mesh {
+  position: absolute; inset: 0;
+  opacity: .035;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='52' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon points='30,2 58,17 58,43 30,50 2,43 2,17' fill='none' stroke='%23fff' stroke-width='.8'/%3E%3C/svg%3E");
+  background-size: 60px 52px;
+}
+.hero-inner {
+  position: relative; z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+  width: 100%;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 100px 28px 80px;
+}
+/* hero left */
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 6px 16px 6px 10px;
+  font-size: 12px;
+  color: var(--dim);
+  margin-bottom: 30px;
+}
+.blink {
+  width: 6px; height: 6px;
+  background: var(--teal);
+  border-radius: 50%;
+  animation: blink 2s infinite;
+}
+@keyframes blink {
+  0%,100% { box-shadow: 0 0 0 0 rgba(0,191,165,.45); }
+  50%      { box-shadow: 0 0 0 6px rgba(0,191,165,0); }
+}
+.hero-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(3.8rem, 9vw, 6.5rem);
+  font-weight: 800;
+  line-height: .94;
+  letter-spacing: -0.025em;
+  margin-bottom: 8px;
+}
+.hero-title .accent {
+  display: block;
+  background: linear-gradient(130deg, var(--flame) 0%, var(--gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-tagline { font-size: 1.15rem; color: var(--dim); margin: 18px 0 36px; max-width: 460px; }
+.hero-tagline strong { color: var(--text); }
+.btn-row { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn-p {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: linear-gradient(135deg, var(--flame), #FF8A50);
+  color: #fff;
+  font-weight: 600; font-size: 14px;
+  padding: 14px 28px; border-radius: 10px;
+  text-decoration: none;
+  box-shadow: 0 8px 32px rgba(255,87,34,.3);
+  transition: transform .2s, box-shadow .2s;
+}
+.btn-p:hover { transform: translateY(-2px); box-shadow: 0 12px 44px rgba(255,87,34,.45); }
+.btn-g {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent; color: var(--text);
+  font-weight: 500; font-size: 14px;
+  padding: 14px 24px; border-radius: 10px;
+  text-decoration: none;
+  border: 1px solid var(--border);
+  transition: background .2s, border-color .2s;
+}
+.btn-g:hover { background: rgba(255,255,255,.04); border-color: rgba(255,255,255,.16); }
+
+/* hero card */
+.hero-right { display: flex; justify-content: center; align-items: center; perspective: 1400px; }
+.app-card {
+  width: 340px;
+  background: rgba(12,12,30,.9);
+  border: 1px solid rgba(255,87,34,.22);
+  border-radius: 26px;
+  position: relative; overflow: hidden;
+  transition: transform .12s ease-out;
+}
+.app-card::before {
+  content: '';
+  position: absolute; top: -60%; left: -60%; width: 220%; height: 220%;
+  background: conic-gradient(from 0deg, transparent 0%, rgba(255,87,34,.07) 10%, transparent 20%);
+  animation: spin 10s linear infinite;
+  pointer-events: none;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.app-card-inner { position: relative; padding: 24px; display: flex; flex-direction: column; gap: 18px; }
+.app-topbar { display: flex; align-items: center; justify-content: space-between; }
+.app-brand {
+  font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 800;
+  background: linear-gradient(135deg, var(--flame), var(--gold));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.dots { display: flex; gap: 5px; }
+.dots span { width: 7px; height: 7px; border-radius: 50%; background: var(--border); }
+.dots span.a { background: var(--flame); }
+
+.lb-head { font-size: 10px; text-transform: uppercase; letter-spacing: .1em; color: var(--dim); margin-bottom: 10px; }
+.lb-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 12px; border-radius: 10px;
+  background: rgba(255,255,255,.025);
+  border: 1px solid transparent;
+  margin-bottom: 6px;
+}
+.lb-row.top { background: rgba(255,87,34,.07); border-color: rgba(255,87,34,.18); }
+.lb-row.me  { border-color: rgba(255,87,34,.4); background: rgba(255,87,34,.04); }
+.rank { font-family:'Syne',sans-serif; font-size:12px; font-weight:700; color:var(--dim); width:18px; }
+.rank.g { color:var(--gold); } .rank.s { color:#C0C0C0; }
+.avi {
+  width: 30px; height: 30px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 600; flex-shrink: 0;
+}
+.lb-name { flex: 1; font-size: 12px; font-weight: 500; }
+.lb-pts  { font-size: 11px; font-weight: 600; color: var(--ember); }
+
+.streak-box {
+  background: rgba(255,255,255,.025); border: 1px solid var(--border);
+  border-radius: 12px; padding: 12px;
+}
+.streak-label { font-size: 10px; text-transform: uppercase; letter-spacing: .1em; color: var(--dim); margin-bottom: 8px; }
+.streak-days { display: flex; gap: 5px; }
+.sd {
+  flex: 1; height: 24px; border-radius: 4px;
+  background: rgba(255,255,255,.05);
+}
+.sd.d { background: linear-gradient(to top, var(--flame), var(--ember)); }
+.sd.t { background: linear-gradient(to top, var(--gold), #FFE082); box-shadow: 0 0 8px rgba(255,193,7,.4); }
+
+.beats-box {
+  display: flex; align-items: center; gap: 12px;
+  background: rgba(0,191,165,.07); border: 1px solid rgba(0,191,165,.18);
+  border-radius: 12px; padding: 12px 14px;
+}
+.beats-icon { font-size: 22px; }
+.beats-meta { flex: 1; }
+.beats-title { font-size: 12px; font-weight: 600; margin-bottom: 2px; }
+.beats-sub { font-size: 10px; color: var(--dim); }
+.beats-bars { display: flex; align-items: flex-end; gap: 2px; height: 22px; }
+.bb { width: 3px; border-radius: 2px; background: var(--teal); animation: eq .8s infinite alternate; }
+.bb:nth-child(1) { height: 60%; animation-delay: 0s; }
+.bb:nth-child(2) { height: 100%; animation-delay: .1s; }
+.bb:nth-child(3) { height: 45%; animation-delay: .2s; }
+.bb:nth-child(4) { height: 80%; animation-delay: .3s; }
+.bb:nth-child(5) { height: 55%; animation-delay: .15s; }
+@keyframes eq {
+  from { transform: scaleY(.5); }
+  to   { transform: scaleY(1); }
+}
+
+/* ── PROBLEMS ────────────────────────────────────── */
+.problems-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 16px;
+  margin-top: 52px;
+}
+.p-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 28px;
+  position: relative; overflow: hidden;
+  transition: transform .3s, border-color .3s, box-shadow .3s;
+}
+.p-card::after {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--flame), transparent);
+  opacity: 0; transition: opacity .3s;
+}
+.p-card:hover { transform: translateY(-5px); border-color: rgba(255,87,34,.3); box-shadow: 0 16px 40px rgba(0,0,0,.35); }
+.p-card:hover::after { opacity: 1; }
+.p-icon { font-size: 26px; margin-bottom: 14px; display: block; }
+.p-title { font-family:'Syne',sans-serif; font-size:.95rem; font-weight:700; margin-bottom:8px; }
+.p-desc  { font-size:.85rem; color:var(--dim); line-height:1.6; }
+
+/* ── FEATURES ────────────────────────────────────── */
+.feat-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 20px;
+  margin-top: 52px;
+}
+.f-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 32px 28px;
+  cursor: default;
+  transition: transform .4s ease, box-shadow .4s ease, border-color .3s;
+}
+.f-card:hover {
+  transform: perspective(900px) rotateY(-5deg) rotateX(2deg) translateZ(6px);
+  box-shadow: 10px 14px 48px rgba(0,0,0,.4), -4px -4px 18px rgba(255,87,34,.05);
+  border-color: rgba(255,87,34,.28);
+}
+.f-card.wide { grid-column: span 2; }
+.f-icon {
+  width: 50px; height: 50px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 21px; margin-bottom: 20px;
+  background: rgba(255,87,34,.1); border: 1px solid rgba(255,87,34,.22);
+}
+.f-icon.pu { background: rgba(124,58,237,.1); border-color: rgba(124,58,237,.22); }
+.f-icon.te { background: rgba(0,191,165,.1);  border-color: rgba(0,191,165,.22); }
+.f-icon.go { background: rgba(255,193,7,.1);  border-color: rgba(255,193,7,.22); }
+.f-title { font-family:'Syne',sans-serif; font-size:1.1rem; font-weight:700; margin-bottom:10px; }
+.f-desc  { font-size:.875rem; color:var(--dim); line-height:1.65; }
+.f-chip {
+  display: inline-block;
+  margin-top: 14px;
+  font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 100px;
+  background: rgba(255,87,34,.08); color: var(--ember); letter-spacing: .05em;
+}
+.f-chip.pu { background: rgba(124,58,237,.1); color: #A78BFA; }
+.f-chip.te { background: rgba(0,191,165,.1);  color: #5EEAD4; }
+.f-chip.go { background: rgba(255,193,7,.1);  color: #FCD34D; }
+
+/* ── MARKET ──────────────────────────────────────── */
+.market-section { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+.stats-row {
+  display: grid; grid-template-columns: repeat(4,1fr);
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border); border-radius: 20px;
+  overflow: hidden; margin-top: 52px; margin-bottom: 52px;
+}
+.s-block {
+  background: var(--surface2); padding: 32px 24px; text-align: center;
+}
+.s-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 2.4rem; font-weight: 800; line-height: 1;
+  background: linear-gradient(135deg, var(--flame), var(--gold));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  margin-bottom: 6px;
+}
+.s-num sup { font-size: 1.4rem; }
+.s-label { font-size: .78rem; color: var(--dim); line-height: 1.45; }
+
+.market-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
+.chart-box {
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: 20px; padding: 30px;
+}
+.chart-title { font-family:'Syne',sans-serif; font-size:1rem; font-weight:700; margin-bottom:4px; }
+.chart-sub   { font-size:.78rem; color:var(--dim); margin-bottom:26px; }
+
+/* bar chart */
+.bar-chart { display: flex; align-items: flex-end; gap: 8px; height: 180px; }
+.bar-col { flex:1; display:flex; flex-direction:column; align-items:center; gap:7px; height:100%; justify-content:flex-end; }
+.bar-val { font-size:9px; font-weight:600; color:var(--dim); text-align:center; white-space:nowrap; }
+.bar {
+  width: 100%; border-radius: 6px 6px 0 0;
+  background: linear-gradient(to top, rgba(255,87,34,.35), rgba(255,87,34,.65));
+  height: 0;
+  transition: height 1.3s cubic-bezier(.34,1.56,.64,1);
+}
+.bar.hi { background: linear-gradient(to top, var(--flame), var(--gold)); box-shadow: 0 0 18px rgba(255,87,34,.35); }
+.bar-yr { font-size:10px; color:var(--dim); }
+.bar-yr.hi { color:var(--ember); font-weight:600; }
+
+/* donut */
+.donut-box {
+  display: flex; flex-direction: column; gap: 18px;
+}
+.donut-wrap { position: relative; width: 156px; height: 156px; margin: 0 auto; }
+.donut-center {
+  position: absolute; top:50%; left:50%;
+  transform: translate(-50%,-50%); text-align:center;
+}
+.donut-num {
+  font-family:'Syne',sans-serif; font-size:1.5rem; font-weight:800;
+  background: linear-gradient(135deg,var(--flame),var(--gold));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  line-height:1;
+}
+.donut-lbl { font-size:10px; color:var(--dim); line-height:1.3; }
+
+.legend { display:flex; flex-direction:column; gap:9px; }
+.leg { display:flex; align-items:center; gap:8px; font-size:12px; }
+.leg-dot { width:8px; height:8px; border-radius:2px; flex-shrink:0; }
+.leg-txt { color:var(--dim); flex:1; }
+.leg-val { font-weight:600; }
+
+.market-extra {
+  margin-top: 18px; padding-top: 18px;
+  border-top: 1px solid var(--border);
+  font-size: 12px; color: var(--dim); line-height: 1.9;
+}
+.market-extra strong { color: var(--text); }
+
+/* ── INTERFACES ──────────────────────────────────── */
+.iface-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:52px; }
+.i-card {
+  border-radius: 20px; padding: 34px 28px;
+  border: 1px solid var(--border); position: relative; overflow: hidden;
+}
+.i-card.active {
+  background: linear-gradient(150deg, rgba(255,87,34,.09), rgba(255,140,60,.04));
+  border-color: rgba(255,87,34,.38);
+}
+.i-card.future { background: var(--surface); opacity: .55; }
+.i-badge {
+  display: inline-block; font-size: 10px; font-weight:600;
+  letter-spacing:.08em; text-transform:uppercase;
+  padding: 4px 10px; border-radius: 100px; margin-bottom: 14px;
+}
+.i-badge.live { background:rgba(0,191,165,.14); color:var(--teal); border:1px solid rgba(0,191,165,.25); }
+.i-badge.soon { background:rgba(255,255,255,.04); color:var(--dim); border:1px solid var(--border); }
+.i-icon  { font-size:34px; margin-bottom:14px; display:block; }
+.i-title { font-family:'Syne',sans-serif; font-size:1.25rem; font-weight:800; margin-bottom:14px; }
+.i-list  { list-style:none; display:flex; flex-direction:column; gap:8px; }
+.i-list li {
+  display:flex; align-items:flex-start; gap:8px;
+  font-size:.86rem; color:var(--dim);
+}
+.i-list li::before { content:'→'; color:var(--flame); font-size:11px; margin-top:2px; flex-shrink:0; }
+.i-list.dim li::before { color:var(--dim); }
+
+/* ── VALIDATION ──────────────────────────────────── */
+.val-grid { display:grid; grid-template-columns:1fr 1fr; gap:22px; margin-top:52px; }
+.v-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 20px; padding: 34px;
+}
+.v-card-title {
+  font-family:'Syne',sans-serif; font-size:1.05rem; font-weight:700;
+  display:flex; align-items:center; gap:10px; margin-bottom:24px;
+}
+.v-ico {
+  width:34px; height:34px; border-radius:9px;
+  display:flex; align-items:center; justify-content:center; font-size:15px;
+}
+.v-ico.o { background:rgba(255,87,34,.14); }
+.v-ico.p { background:rgba(124,58,237,.14); }
+
+.q-list { display:flex; flex-direction:column; gap:14px; }
+.q-row  { display:flex; gap:11px; align-items:flex-start; }
+.q-n {
+  width:22px; height:22px; border-radius:6px;
+  background:rgba(255,87,34,.1); border:1px solid rgba(255,87,34,.22);
+  font-size:10px; font-weight:700; color:var(--ember);
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0; margin-top:1px;
+}
+.q-n.p { background:rgba(124,58,237,.1); border-color:rgba(124,58,237,.22); color:#A78BFA; }
+.q-txt  { font-size:.855rem; color:var(--dim); line-height:1.6; }
+
+/* ── FUTURE SCOPE ────────────────────────────────── */
+.future-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:40px; }
+.fu-card {
+  background: rgba(255,255,255,.018);
+  border: 1px dashed rgba(255,255,255,.08);
+  border-radius: 14px; padding: 22px; opacity: .72;
+}
+.fu-phase { font-size:10px; text-transform:uppercase; letter-spacing:.1em; color:var(--dim); margin-bottom:6px; }
+.fu-title { font-family:'Syne',sans-serif; font-size:.92rem; font-weight:700; margin-bottom:6px; }
+.fu-desc  { font-size:.8rem; color:var(--dim); line-height:1.55; }
+
+/* ── CTA ─────────────────────────────────────────── */
+.cta-section {
+  background: linear-gradient(135deg, rgba(255,87,34,.07) 0%, rgba(124,58,237,.05) 100%);
+  border-top: 1px solid var(--border);
+  text-align: center; padding: 100px 24px;
+}
+
+/* ── RESPONSIVE ──────────────────────────────────── */
+@media (max-width:960px) {
+  .hero-inner { grid-template-columns:1fr; }
+  .hero-right { display:none; }
+  .problems-grid, .feat-grid { grid-template-columns:1fr 1fr; }
+  .f-card.wide { grid-column:span 1; }
+  .stats-row { grid-template-columns:1fr 1fr; }
+  .market-grid { grid-template-columns:1fr; }
+  .iface-grid  { grid-template-columns:1fr; }
+  .val-grid    { grid-template-columns:1fr; }
+  .future-grid { grid-template-columns:1fr 1fr; }
+}
+@media (max-width:600px) {
+  .problems-grid, .feat-grid { grid-template-columns:1fr; }
+  .future-grid { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══════════════════════════════════════════ -->
+<div class="nav-shell" id="ns">
+  <nav>
+    <a class="nav-logo" href="#">🐝 LiftHive</a>
+    <ul class="nav-links">
+      <li><a href="#problems">Problem</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#market">Market</a></li>
+      <li><a href="#interfaces">Interfaces</a></li>
+      <li><a href="#validate">Validate</a></li>
+    </ul>
+  </nav>
+</div>
+
+<!-- ═══ HERO ══════════════════════════════════════════ -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hex-mesh"></div>
+  <div class="hero-inner">
+
+    <div class="hero-left">
+      <div class="hero-badge"><span class="blink"></span> Early Stage · Pune, India · 2026</div>
+      <h1 class="hero-title">
+        Lift.<br>
+        <span class="accent">Together.</span>
+      </h1>
+      <p class="hero-tagline">
+        LiftHive turns your gym into a social arena —<br>
+        <strong>leaderboards, challenges, beats, and split training.</strong><br>
+        Built for gym-goers. Starting in Pune.
+      </p>
+      <div class="btn-row">
+        <a href="#features" class="btn-p">Explore Features ↓</a>
+        <a href="#market" class="btn-g">View Market →</a>
+      </div>
+    </div>
+
+    <!-- app card mockup -->
+    <div class="hero-right">
+      <div class="app-card" id="appCard">
+        <div class="app-card-inner">
+          <div class="app-topbar">
+            <span class="app-brand">🐝 LiftHive</span>
+            <div class="dots"><span class="a"></span><span></span><span></span></div>
+          </div>
+
+          <div>
+            <div class="lb-head">🏆 Weekly Board · Baner CrossFit</div>
+            <div class="lb-row top">
+              <span class="rank g">1</span>
+              <div class="avi" style="background:linear-gradient(135deg,#FF5722,#FF8A50)">R</div>
+              <span class="lb-name">Rahul K.</span>
+              <span class="lb-pts">2,840 pts</span>
+            </div>
+            <div class="lb-row top">
+              <span class="rank s">2</span>
+              <div class="avi" style="background:linear-gradient(135deg,#7C3AED,#A78BFA)">S</div>
+              <span class="lb-name">Sneha M.</span>
+              <span class="lb-pts">2,615 pts</span>
+            </div>
+            <div class="lb-row">
+              <span class="rank">3</span>
+              <div class="avi" style="background:linear-gradient(135deg,#00BFA5,#5EEAD4)">A</div>
+              <span class="lb-name">Arjun P.</span>
+              <span class="lb-pts">2,390 pts</span>
+            </div>
+            <div class="lb-row me">
+              <span class="rank" style="color:var(--flame)">6</span>
+              <div class="avi" style="background:linear-gradient(135deg,#FF6D00,#FFB300)">Y</div>
+              <span class="lb-name" style="color:var(--text);font-weight:600">You</span>
+              <span class="lb-pts">1,920 pts</span>
+            </div>
+          </div>
+
+          <div class="streak-box">
+            <div class="streak-label">🔥 7-Day Streak</div>
+            <div class="streak-days">
+              <div class="sd d"></div><div class="sd d"></div><div class="sd d"></div>
+              <div class="sd d"></div><div class="sd d"></div><div class="sd d"></div>
+              <div class="sd t"></div>
+            </div>
+          </div>
+
+          <div class="beats-box">
+            <span class="beats-icon">🎵</span>
+            <div class="beats-meta">
+              <div class="beats-title">GymBeats · Chest Day</div>
+              <div class="beats-sub">Set 3 of 4 · Rest: 0:42</div>
+            </div>
+            <div class="beats-bars">
+              <div class="bb"></div><div class="bb"></div><div class="bb"></div>
+              <div class="bb"></div><div class="bb"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ PROBLEMS ══════════════════════════════════════ -->
+<section id="problems">
+  <div class="container">
+    <div class="reveal">
+      <div class="tag">⚡ The Problem</div>
+      <h2 class="h1">Why gyms fail people —<br>not the other way around</h2>
+      <p class="sub">India's gym dropout rate stays above 60%. These are the six core reasons nobody's fixed yet.</p>
+    </div>
+    <div class="problems-grid">
+      <div class="p-card reveal">
+        <span class="p-icon">🚶</span>
+        <div class="p-title">Solo Syndrome</div>
+        <p class="p-desc">You join alone, you quit alone. No accountability loop, no social pull, no one to push you when motivation tanks.</p>
+      </div>
+      <div class="p-card reveal">
+        <span class="p-icon">🗺️</span>
+        <div class="p-title">Gym Blindness</div>
+        <p class="p-desc">Finding the right gym is guesswork. Google Maps shows a pin — not crowd levels, trainer quality, or whether it fits your vibe.</p>
+      </div>
+      <div class="p-card reveal">
+        <span class="p-icon">💸</span>
+        <div class="p-title">Trainer Unaffordability</div>
+        <p class="p-desc">Good trainers cost ₹3,000–8,000/month. That's out of reach for most gym-goers on their own.</p>
+      </div>
+      <div class="p-card reveal">
+        <span class="p-icon">🎵</span>
+        <div class="p-title">Playlist Friction</div>
+        <p class="p-desc">Curating the right energy for chest day vs. cardio vs. leg day is a manual chore. Music should flow with the workout.</p>
+      </div>
+      <div class="p-card reveal">
+        <span class="p-icon">📉</span>
+        <div class="p-title">Invisible Progress</div>
+        <p class="p-desc">There's no easy way to see if you're actually getting stronger — not just in a vacuum, but compared to your gym peers.</p>
+      </div>
+      <div class="p-card reveal">
+        <span class="p-icon">🔇</span>
+        <div class="p-title">No Celebration Layer</div>
+        <p class="p-desc">You hit a 1RM PR or a 30-day streak and nobody in your social feed cares. Fitness has no native reward system.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ FEATURES ══════════════════════════════════════ -->
+<section id="features">
+  <div class="container">
+    <div class="reveal">
+      <div class="tag">🎯 For Gym Goers · Phase 1</div>
+      <h2 class="h1">Five things that<br>change the game</h2>
+      <p class="sub">LiftHive's core product is built entirely around the gym-goer. Every feature solves a real daily pain point.</p>
+    </div>
+    <div class="feat-grid">
+      <div class="f-card wide reveal">
+        <div class="f-icon">🏆</div>
+        <div class="f-title">Gym Leaderboard</div>
+        <p class="f-desc">Real-time rankings across your gym — weekly points for check-ins, sets completed, and PRs hit. Compete with everyone at your gym or call out specific people directly. This is the social pull that keeps you showing up when motivation alone doesn't.</p>
+        <span class="f-chip">Core Feature · Social Retention</span>
+      </div>
+      <div class="f-card reveal">
+        <div class="f-icon pu">⚡</div>
+        <div class="f-title">Progressive Overload Challenges</div>
+        <p class="f-desc">Challenge a friend to a progressive overload race — same muscle group, same time window, most improvement wins. Built-in accountability with real stakes and zero guessing.</p>
+        <span class="f-chip pu">Virality · Peer Challenge</span>
+      </div>
+      <div class="f-card reveal">
+        <div class="f-icon te">📍</div>
+        <div class="f-title">GymMap</div>
+        <p class="f-desc">Advanced gym discovery — real member reviews, live crowd estimates, trainer ratings, equipment inventory, and vibe scores. Find your perfect gym, not just the closest one.</p>
+        <span class="f-chip te">Discovery · Acquisition Hook</span>
+      </div>
+      <div class="f-card reveal">
+        <div class="f-icon go">🎵</div>
+        <div class="f-title">GymBeats</div>
+        <p class="f-desc">Playlists synced to your muscle group with automatic set rest timers. Chest day sounds different from cardio — and the next set starts when the rest ends. Zero manual curation.</p>
+        <span class="f-chip go">Daily Utility · Stickiness</span>
+      </div>
+      <div class="f-card reveal">
+        <div class="f-icon pu">🤝</div>
+        <div class="f-title">TrainTogether</div>
+        <p class="f-desc">Split a personal trainer's cost across 2–4 people. Book together, train together, pay a fraction. Quality coaching goes from a luxury to a shared expense.</p>
+        <span class="f-chip pu">Marketplace · Commission Revenue</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ MARKET ════════════════════════════════════════ -->
+<section id="market" class="market-section">
+  <div class="container">
+    <div class="reveal">
+      <div class="tag">📊 Market Opportunity</div>
+      <h2 class="h1">The numbers are<br>hard to ignore</h2>
+      <p class="sub">India's fitness market is compounding at 15% CAGR. Pune sits in the highest-revenue region of the country.</p>
+    </div>
+
+    <div class="stats-row reveal">
+      <div class="s-block">
+        <div class="s-num" id="c1">$463<sup>M</sup></div>
+        <div class="s-label">India fitness app<br>market size (2024)</div>
+      </div>
+      <div class="s-block">
+        <div class="s-num">16.4<sup>%</sup></div>
+        <div class="s-label">CAGR<br>2025 – 2030</div>
+      </div>
+      <div class="s-block">
+        <div class="s-num" id="c2">3,500<sup>+</sup></div>
+        <div class="s-label">Registered gyms<br>in Pune metro</div>
+      </div>
+      <div class="s-block">
+        <div class="s-num">31.5<sup>%</sup></div>
+        <div class="s-label">West India share<br>of India gym market</div>
+      </div>
+    </div>
+
+    <div class="market-grid reveal">
+      <!-- Bar chart -->
+      <div class="chart-box">
+        <div class="chart-title">India Fitness App Market Growth</div>
+        <div class="chart-sub">USD Million · 2024 → 2030 · 16.4% CAGR (Source: IMARC / Grand View Research)</div>
+        <div class="bar-chart" id="barChart">
+          <div class="bar-col">
+            <div class="bar-val">$463M</div>
+            <div class="bar" data-h="40" style="background:linear-gradient(to top,rgba(255,87,34,.4),rgba(255,87,34,.65))"></div>
+            <div class="bar-yr">2024</div>
+          </div>
+          <div class="bar-col">
+            <div class="bar-val">$539M</div>
+            <div class="bar" data-h="46"></div>
+            <div class="bar-yr">2025</div>
+          </div>
+          <div class="bar-col">
+            <div class="bar-val">$627M</div>
+            <div class="bar" data-h="54"></div>
+            <div class="bar-yr">2026</div>
+          </div>
+          <div class="bar-col">
+            <div class="bar-val">$729M</div>
+            <div class="bar" data-h="63"></div>
+            <div class="bar-yr">2027</div>
+          </div>
+          <div class="bar-col">
+            <div class="bar-val">$847M</div>
+            <div class="bar" data-h="73"></div>
+            <div class="bar-yr">2028</div>
+          </div>
+          <div class="bar-col">
+            <div class="bar-val">$985M</div>
+            <div class="bar" data-h="85"></div>
+            <div class="bar-yr">2029</div>
+          </div>
+          <div class="bar-col">
+            <div class="bar-val">$1.16B</div>
+            <div class="bar hi" data-h="100"></div>
+            <div class="bar-yr hi">2030</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Donut + extra -->
+      <div class="chart-box donut-box">
+        <div class="chart-title">India Gym Market</div>
+        <div class="chart-sub">Regional share — West India leads</div>
+        <div class="donut-wrap">
+          <svg viewBox="0 0 156 156" width="156" height="156">
+            <circle cx="78" cy="78" r="58" fill="none" stroke="rgba(255,255,255,.05)" stroke-width="20"/>
+            <!-- West India 31.5% -->
+            <circle cx="78" cy="78" r="58" fill="none"
+              stroke="url(#g1)" stroke-width="20"
+              stroke-dasharray="114.7 249.4" stroke-dashoffset="0"
+              transform="rotate(-90 78 78)"
+              style="transition:stroke-dasharray 1.2s ease"/>
+            <!-- South India 25% -->
+            <circle cx="78" cy="78" r="58" fill="none"
+              stroke="rgba(124,58,237,.5)" stroke-width="20"
+              stroke-dasharray="91.1 273" stroke-dashoffset="-114.7"
+              transform="rotate(-90 78 78)"/>
+            <!-- North+East 43.5% -->
+            <circle cx="78" cy="78" r="58" fill="none"
+              stroke="rgba(0,191,165,.32)" stroke-width="20"
+              stroke-dasharray="158.3 205.8" stroke-dashoffset="-205.8"
+              transform="rotate(-90 78 78)"/>
+            <defs>
+              <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#FF5722"/>
+                <stop offset="100%" stop-color="#FFC107"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <div class="donut-center">
+            <div class="donut-num">31.5%</div>
+            <div class="donut-lbl">West<br>India</div>
+          </div>
+        </div>
+        <div class="legend">
+          <div class="leg">
+            <div class="leg-dot" style="background:linear-gradient(135deg,#FF5722,#FFC107)"></div>
+            <span class="leg-txt">West India (Mumbai + Pune)</span>
+            <span class="leg-val">31.5%</span>
+          </div>
+          <div class="leg">
+            <div class="leg-dot" style="background:rgba(124,58,237,.6)"></div>
+            <span class="leg-txt">South India</span>
+            <span class="leg-val">25%</span>
+          </div>
+          <div class="leg">
+            <div class="leg-dot" style="background:rgba(0,191,165,.5)"></div>
+            <span class="leg-txt">North + East India</span>
+            <span class="leg-val">43.5%</span>
+          </div>
+        </div>
+        <div class="market-extra">
+          🏋️ <strong>13.6M</strong> paid gym members today → <strong>23.3M</strong> by 2030<br>
+          📱 <strong>65% YoY</strong> rise in fitness app downloads<br>
+          💸 <strong>52%</strong> of non-members cite price as barrier<br>
+          🏙️ Pune IT corridor — <strong>300,000+</strong> employees in Hinjewadi alone
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ INTERFACES ════════════════════════════════════ -->
+<section id="interfaces">
+  <div class="container">
+    <div class="reveal">
+      <div class="tag">🧩 Three Stakeholders</div>
+      <h2 class="h1">One platform.<br>Three interfaces.</h2>
+      <p class="sub">LiftHive eventually serves gym-goers, trainers, and owners. We build for gym-goers first — the network follows the users.</p>
+    </div>
+    <div class="iface-grid">
+      <div class="i-card active reveal">
+        <span class="i-badge live">Phase 1 · Active Focus</span>
+        <span class="i-icon">🏋️</span>
+        <div class="i-title">For Gym Goers</div>
+        <ul class="i-list">
+          <li>Weekly leaderboard at their gym</li>
+          <li>Progressive overload challenges</li>
+          <li>GymMap — smart gym discovery</li>
+          <li>GymBeats — muscle-synced playlists</li>
+          <li>TrainTogether — split trainer cost</li>
+        </ul>
+      </div>
+      <div class="i-card future reveal">
+        <span class="i-badge soon">Phase 2 · Coming Soon</span>
+        <span class="i-icon">💪</span>
+        <div class="i-title">For Trainers</div>
+        <ul class="i-list dim">
+          <li>Profile & discovery listing</li>
+          <li>Group booking management</li>
+          <li>Earnings dashboard</li>
+          <li>Client progress tracking</li>
+          <li>Availability calendar</li>
+        </ul>
+      </div>
+      <div class="i-card future reveal">
+        <span class="i-badge soon">Phase 3 · Coming Soon</span>
+        <span class="i-icon">🏢</span>
+        <div class="i-title">For Gym Owners</div>
+        <ul class="i-list dim">
+          <li>Gym profile + map listing</li>
+          <li>Member activity insights</li>
+          <li>Leads & acquisition tools</li>
+          <li>Campaign management</li>
+          <li>Equipment & class listings</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ VALIDATION ════════════════════════════════════ -->
+<section id="validate">
+  <div class="container">
+    <div class="reveal">
+      <div class="tag">🔍 What We Need to Crack</div>
+      <h2 class="h1">Big questions before<br>we write one line of code</h2>
+      <p class="sub">30-day sprint. Real conversations. These two buckets decide if we build what we think — or something different.</p>
+    </div>
+    <div class="val-grid">
+      <div class="v-card reveal">
+        <div class="v-card-title">
+          <div class="v-ico o">💰</div>
+          Monetization Unknowns
+        </div>
+        <div class="q-list">
+          <div class="q-row">
+            <div class="q-n">1</div>
+            <div class="q-txt">Will gym-goers in Pune pay ₹99–199/month for a social gym app — or does it need to be free (ads/freemium) to get any traction?</div>
+          </div>
+          <div class="q-row">
+            <div class="q-n">2</div>
+            <div class="q-txt">Which single feature makes someone actually reach for their wallet — leaderboard bragging rights, GymBeats, or access to a cheaper trainer?</div>
+          </div>
+          <div class="q-row">
+            <div class="q-n">3</div>
+            <div class="q-txt">Does the TrainTogether commission model hold, or will users and trainers negotiate directly and cut us out after the first session?</div>
+          </div>
+          <div class="q-row">
+            <div class="q-n">4</div>
+            <div class="q-txt">Is ₹999/year (one-time) more appealing than ₹149/month? Which payment format creates least resistance in this price segment?</div>
+          </div>
+          <div class="q-row">
+            <div class="q-n">5</div>
+            <div class="q-txt">Can GymMap work as the free acquisition hook — basic discovery free, premium unlocks real-time crowd data and trainer ratings?</div>
+          </div>
+        </div>
+      </div>
+      <div class="v-card reveal">
+        <div class="v-card-title">
+          <div class="v-ico p">🏢</div>
+          Gym Owner Validation
+        </div>
+        <div class="q-list">
+          <div class="q-row">
+            <div class="q-n p">1</div>
+            <div class="q-txt">Will gym owners allow free listing on GymMap without paying us anything? It's organic SEO for them — but will they trust a new app?</div>
+          </div>
+          <div class="q-row">
+            <div class="q-n p">2</div>
+            <div class="q-txt">Do gym owners want their members competing on a public leaderboard — or does it create anxiety, comparison pressure, or member drop-off?</div>
+          </div>
+          <div class="q-row">
+            <div class="q-n p">3</div>
+            <div class="q-txt">Will trainers voluntarily join TrainTogether, or do they fear being commoditized or losing the ₹3,000–8,000/month rate they currently charge?</div>
+          </div>
+          <div class="q-row">
+            <div class="q-n p">4</div>
+            <div class="q-txt">Which 3 gyms in Baner, Kothrud, or Wakad will be our first partners — and what do they actually want in exchange for early access?</div>
+          </div>
+          <div class="q-row">
+            <div class="q-n p">5</div>
+            <div class="q-txt">What's the current cost-per-member-acquisition for a mid-size Pune gym? This number defines our value pitch when we approach owners in Phase 3.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ FUTURE SCOPE ══════════════════════════════════ -->
+<section id="future">
+  <div class="container">
+    <div class="reveal">
+      <div class="tag">🚀 Future Scope</div>
+      <h2 class="h1">Parked intentionally.<br>Real opportunities.</h2>
+      <p class="sub">These are validated directions — set aside until Phase 1 is proven and profitable. Not dismissed, just sequenced.</p>
+    </div>
+    <div class="future-grid reveal">
+      <div class="fu-card">
+        <div class="fu-phase">Phase 3</div>
+        <div class="fu-title">🏢 Gym Leads Generator</div>
+        <p class="fu-desc">B2B SaaS for gym owners to run member acquisition campaigns and convert app users into walk-ins.</p>
+      </div>
+      <div class="fu-card">
+        <div class="fu-phase">Phase 4</div>
+        <div class="fu-title">🏙️ IT Company Wellness</div>
+        <p class="fu-desc">Gym + trainer bundles sold to Pune IT companies as performance-linked employee wellness perks.</p>
+      </div>
+      <div class="fu-card">
+        <div class="fu-phase">Phase 3</div>
+        <div class="fu-title">🏅 Inter-Gym Tournaments</div>
+        <p class="fu-desc">Monthly leaderboard wars between gyms — sponsor-backed prizes, city-level fitness culture moments.</p>
+      </div>
+      <div class="fu-card">
+        <div class="fu-phase">Phase 4</div>
+        <div class="fu-title">🤖 AI Workout Engine</div>
+        <p class="fu-desc">ML-driven plans from your progression data, leaderboard gaps, and trainer session history.</p>
+      </div>
+      <div class="fu-card">
+        <div class="fu-phase">Phase 4</div>
+        <div class="fu-title">⌚ Wearable Sync</div>
+        <p class="fu-desc">Auto-score points via Apple Watch, Mi Band, or Garmin. Leaderboards without manual logging.</p>
+      </div>
+      <div class="fu-card">
+        <div class="fu-phase">Phase 5</div>
+        <div class="fu-title">🌍 City Expansion</div>
+        <p class="fu-desc">Pune playbook → Mumbai → Bengaluru → Hyderabad. Replicate what works in the next 5 gym-dense metros.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA ════════════════════════════════════════════ -->
+<section class="cta-section">
+  <div class="container">
+    <div class="reveal">
+      <div class="tag" style="margin:0 auto 24px;display:table">🐝 LiftHive · Pune 2026</div>
+      <h2 class="h1" style="text-align:center;max-width:580px;margin:0 auto 16px">Ready to make the gym social?</h2>
+      <p class="sub" style="text-align:center;margin:0 auto 40px">Gym-goers first. 30-day validation sprint. One city at a time.</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <a href="#problems" class="btn-p">See the Problem ↓</a>
+        <a href="#validate" class="btn-g">View Key Questions</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+/* nav scroll */
+const ns = document.getElementById('ns');
+window.addEventListener('scroll', () => ns.classList.toggle('sticky', scrollY > 55));
+
+/* hero card 3d tilt */
+const card = document.getElementById('appCard');
+const hero = document.querySelector('.hero');
+if (card && hero) {
+  hero.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    const rx = -((e.clientY - r.top - r.height/2) / (r.height/2)) * 10;
+    const ry =  ((e.clientX - r.left - r.width/2)  / (r.width/2))  * 14;
+    card.style.transform = `perspective(1200px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+  });
+  hero.addEventListener('mouseleave', () => {
+    card.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg)';
+  });
+}
+
+/* reveal on scroll */
+const revItems = document.querySelectorAll('.reveal');
+const ro = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      const delay = parseInt(e.target.dataset.d || 0);
+      setTimeout(() => e.target.classList.add('on'), delay);
+      ro.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+revItems.forEach((el, i) => {
+  el.dataset.d = (i % 5) * 70;
+  ro.observe(el);
+});
+
+/* bar chart animate */
+const bc = document.getElementById('barChart');
+const bo = new IntersectionObserver(entries => {
+  if (entries[0].isIntersecting) {
+    document.querySelectorAll('.bar').forEach(b => {
+      b.style.height = b.dataset.h + '%';
+    });
+    bo.disconnect();
+  }
+}, { threshold: 0.4 });
+if (bc) bo.observe(bc);
+
+/* feature card tilt */
+document.querySelectorAll('.f-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    const rx = -((e.clientY - r.top  - r.height/2) / (r.height/2)) * 5;
+    const ry =  ((e.clientX - r.left - r.width/2)  / (r.width/2))  * 7;
+    card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateZ(6px)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = '';
+  });
+});
+</script>
+
+</body>
+</html>
